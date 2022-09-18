@@ -1,0 +1,23 @@
+---
+- name: Configure GCP addresses
+  google.cloud.gcp_compute_address:
+    auth_kind: "{{ gcp_auth_kind | default(omit) }}"
+    service_account_email: "{{ gcp_service_account_email | default(omit) }}"
+    service_account_file: "{{ gcp_service_account_file | default(omit) }}"
+    scopes: "{{ gcp_scopes | default(omit) }}"
+    project: "{{ gcp_project | default(omit) }}"
+    address: "{{ address.address | default(omit) }}"
+    address_type: "{{ address.address_type | default(omit) }}"
+    description: "{{ address.description | default(omit) }}"
+    env_type: "{{ address.env_type | default(omit) }}"
+    name: "{{ address.name }}"
+    network_tier: "{{ address.network_tier | default(omit) }}"
+    purpose: "{{ address.purpose | default(omit) }}"
+    region: "{{ address.region }}"
+    subnetwork: "{{ address.subnetwork | default(omit) }}"
+    state: "{{ address.state | default(gcp_state) | default('present') }}"
+  loop: "{{ gcp_addresses }}"
+  loop_control:
+    loop_var: address
+    label: "{{ address.name }}"
+...

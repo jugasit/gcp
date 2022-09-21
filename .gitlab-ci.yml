@@ -1,12 +1,10 @@
 ---
 default:
-  image: quay.io/ansible/awx-ee
+  image: python:3
 
 lint addresses:
   stage: test
   script:
-    - python3 -m venv venv
-    - source venv/bin/activate
     - pip3 install -r requirements.txt
     - cd roles/addresses
     - molecule lint
@@ -14,5 +12,6 @@ lint addresses:
 build:
   stage: build
   script:
+    - pip3 install -r requirements.txt
     - ansible-galaxy collection build
 ...

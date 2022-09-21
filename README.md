@@ -1,16 +1,16 @@
-# Google Compute Platform Ansible Modules
+# Google Compute Platform Ansible Roles
 
-Ansible modules for interacting with the GCP API.
+Ansible roles for interacting with the GCP API.
 
 ## Documentation
 
-A list of all modules and their documentation can be found in the directory of each role.
+A list of all roles and their documentation can be found in the directory of each role.
 
 ## Installation
 
 You can install the collection from [Ansible Galaxy](https://galaxy.ansible.com/jugasit/gcp) by running `ansible-galaxy collection install jugasit.gcp`.
 
-After the installation, the modules are available as `jugasit.gcp.<module_name>`. Please see the [Using Ansible collections documentation](https://docs.ansible.com/ansible/devel/user_guide/collections_using.html) for further details.
+After the installation, the roles are available as `jugasit.gcp.<module_name>`. Please see the [Using Ansible collections documentation](https://docs.ansible.com/ansible/devel/user_guide/collections_using.html) for further details.
 
 ### Common Role Variables
 

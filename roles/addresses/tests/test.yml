@@ -1,0 +1,6 @@
+---
+- name: Create addresses
+  hosts: localhost
+  roles:
+    - gcp.addresses
+...

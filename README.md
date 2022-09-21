@@ -12,6 +12,24 @@ You can install the collection from [Ansible Galaxy](https://galaxy.ansible.com/
 
 After the installation, the roles are available as `jugasit.gcp.<module_name>`. Please see the [Using Ansible collections documentation](https://docs.ansible.com/ansible/devel/user_guide/collections_using.html) for further details.
 
+### Common Role Requirements
+
+#### Packages
+
+The roles in this collection uses modules from the `google.cloud` collection which requires the following packages to be installed:
+
+```shell
+sudo dnf install python3-requests python3-google-auth
+```
+
+#### Authentication
+
+In order to automate infrastructure in Google Cloud, you must create credentials and select the project to use.
+
+1. [Create service account](https://developers.google.com/identity/protocols/oauth2/service-account#creatinganaccount)
+2. Save the JSON keys and point to them using `gcp_service_account_file`
+3. Use `gcp_project` to specify the GCP project where the resources should be created.
+
 ### Common Role Variables
 
 - `gcp_auth_kind`: The kind of credential to use. If the variable is not specified, the value of environment variable `GCP_AUTH_KIND` will be used instead.

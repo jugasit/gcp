@@ -1,7 +1,6 @@
 ---
 dependency:
   name: galaxy
-  enabled: false
 driver:
   name: delegated
 platforms:
@@ -13,5 +12,5 @@ verifier:
 lint: |
   set -e
   yamllint .
-  ansible-lint .
+  ansible-lint
 ...

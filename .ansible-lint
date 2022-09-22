@@ -1,0 +1,16 @@
+---
+exclude_paths:
+  - .cache/
+  - molecule/
+mock_modules: []
+mock_roles: []
+#loop_var_prefix: "{role}_"
+#var_naming_pattern: "^[a-z_][a-z0-9_]*$"
+use_default_rules: true
+skip_list: []
+enable_list: []
+warn_list: []
+offline: false
+
+kinds:
+  - tasks: roles/**/tasks/*.yml

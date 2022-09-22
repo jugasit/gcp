@@ -6,7 +6,6 @@ lint addresses:
   stage: test
   script:
     - pip3 install -r requirements.txt
-    - cd roles/addresses
     - molecule lint
 
 build:

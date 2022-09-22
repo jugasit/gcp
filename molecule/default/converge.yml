@@ -3,6 +3,6 @@
   hosts: all
   gather_facts: false
   tasks:
-    - name: "Include gcp.addresses"
+    - name: "Include gcp"
       ansible.builtin.include_role:
-        name: "gcp.addresses"
+        name: "gcp"

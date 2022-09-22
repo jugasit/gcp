@@ -4,12 +4,14 @@ default:
 
 lint:
   stage: test
+  needs: []
   script:
     - pip3 install -r requirements.txt
     - molecule lint
 
 build:
   stage: build
+  needs: []
   script:
     - pip3 install -r requirements.txt
     - ansible-galaxy collection build

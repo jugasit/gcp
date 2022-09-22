@@ -2,7 +2,7 @@
 default:
   image: python:3
 
-lint addresses:
+lint:
   stage: test
   script:
     - pip3 install -r requirements.txt

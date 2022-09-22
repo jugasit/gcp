@@ -1,0 +1,6 @@
+---
+collections:
+  - google.cloud
+  - community.general
+  - ansible.netcommon
+...

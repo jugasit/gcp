@@ -4,21 +4,13 @@
   connection: local
   gather_facts: false
   no_log: "{{ molecule_no_log }}"
-  tasks:
-    # Developer must implement.
 
-    # Mandatory configuration for Molecule to function.
+  vars_files:
+    - vars.yml
 
-    - name: Populate instance config
-      ansible.builtin.set_fact:
-        instance_conf: {}
+  vars:
+    gcp_state: absent
 
-    - name: Dump instance config
-      ansible.builtin.copy:
-        content: |
-          # Molecule managed
-
-          {{ instance_conf | to_json | from_json | to_yaml }}
-        dest: "{{ molecule_instance_config }}"
-        mode: 0600
-      when: server.changed | default(false) | bool
+  roles:
+    - addresses
+...

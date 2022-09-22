@@ -1,0 +1,19 @@
+---
+mlcl_pipeline: "{{ lookup('env', 'CI_PIPELINE_ID') }}"
+mlcl_user: "{{ lookup('env', 'USER') }}"
+mlcl_prefix: "{{ mlcl_pipeline | default(mlcl_user, true) }}"
+
+gcp_project: "{{ lookup('env', 'GCP_PROJECT') | default('playground-362708', true) }}"
+gcp_region: europe-north1
+gcp_zone: "{{ gcp_region }}-a"
+gcp_auth_kind: serviceaccount
+gcp_service_account_file: "{{ lookup('env', 'GCP_CREDENTIALS') | default('../../tmp/gcp_credentials.json', true) }}"
+
+gcp_addresses:
+  - name: mlcl-{{ mlcl_prefix }}-address1
+    description: First address in GCP created by Ansible Molecule.
+
+  - name: mlcl-{{ mlcl_prefix }}-address2
+    description: Second address in GCP created by Ansible Molecule.
+    network_tier: STANDARD
+...

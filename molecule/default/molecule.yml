@@ -1,15 +1,23 @@
 ---
 prerun: false
+
 dependency:
   name: galaxy
+
 driver:
   name: delegated
+
 platforms:
-  - name: instance
+  - name: dummy
+
 provisioner:
   name: ansible
+  env:
+    ANSIBLE_ROLES_PATH: ../../roles/
+
 verifier:
   name: ansible
+
 lint: |
   set -e
   yamllint .

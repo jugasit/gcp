@@ -38,3 +38,9 @@ In order to automate infrastructure in Google Cloud, you must create credentials
 - `gcp_scopes`: The specific scopes that you want the actions to use. If the variable is not specified, the value of environment variable `GCP_SCOPES` will be used instead.
 - `gcp_project`: ID of the GCP project.
 - `gcp_state`: The state of the resources. Default is `present`.
+
+## Developing
+
+Contributions to this collection are very appreciated.
+To make it easier to verify your changes we use [Ansible Molecule](https://molecule.readthedocs.io).
+Please read our [Testing guide](TESTING.md) for instructions on how to both run and write tests.

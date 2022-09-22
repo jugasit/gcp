@@ -13,7 +13,7 @@
     name: "{{ address.name }}"
     network_tier: "{{ address.network_tier | default(omit) }}"
     purpose: "{{ address.purpose | default(omit) }}"
-    region: "{{ address.region }}"
+    region: "{{ address.region | default(gcp_region) }}"
     subnetwork: "{{ address.subnetwork | default(omit) }}"
     state: "{{ address.state | default(gcp_state) | default('present') }}"
   loop: "{{ gcp_addresses }}"

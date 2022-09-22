@@ -2,12 +2,13 @@
 default:
   image: python:3
 
-lint:
+molecule:
   stage: test
   needs: []
   script:
     - pip3 install -r requirements.txt
-    - molecule lint
+    - ansible-galaxy collection install -r collections/requirements.yml
+    - molecule test
 
 build:
   stage: build

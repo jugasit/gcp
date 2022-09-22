@@ -1,8 +1,10 @@
 ---
+# This is just a dummy playbook.
+#
+# That's because this collection is a bit special as it doesn't run on any server but it is actually
+# the create.yml playbook which is verified.
+#
 - name: Converge
   hosts: all
   gather_facts: false
-  tasks:
-    - name: "Include gcp"
-      ansible.builtin.include_role:
-        name: "gcp"
+  tasks: []

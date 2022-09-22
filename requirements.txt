@@ -1,2 +1,5 @@
-molecule[lint]
 ansible-lint
+google-auth
+jmespath
+molecule[lint]
+netaddr

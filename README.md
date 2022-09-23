@@ -42,5 +42,9 @@ In order to automate infrastructure in Google Cloud, you must create credentials
 ## Developing
 
 Contributions to this collection are very appreciated.
+
+The source code is available on [GitLab](https://gitlab.com/jugasit/ansible/gcp).
+Any bugs or suggestions are reported as [Issues](https://gitlab.com/jugasit/ansible/gcp/-/issues).
+
 To make it easier to verify your changes we use [Ansible Molecule](https://molecule.readthedocs.io).
-Please read our [Testing guide](TESTING.md) for instructions on how to both run and write tests.
+Please read our [Testing guide](https://gitlab.com/jugasit/ansible/gcp/-/blob/main/TESTING.md) for instructions on how to both run and write tests.

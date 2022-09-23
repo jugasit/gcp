@@ -1,0 +1,19 @@
+---
+- name: Configure GCP networks
+  google.cloud.gcp_compute_network:
+    auth_kind: "{{ gcp_auth_kind | default(omit) }}"
+    service_account_email: "{{ gcp_service_account_email | default(omit) }}"
+    service_account_file: "{{ gcp_service_account_file | default(omit) }}"
+    scopes: "{{ gcp_scopes | default(omit) }}"
+    project: "{{ gcp_project | default(omit) }}"
+    name: "{{ network.name }}"
+    auto_create_subnetworks: "{{ network.auto_create_subnetworks | default(omit) }}"
+    description: "{{ network.description | default(omit) }}"
+    mtu: "{{ network.mtu | default(omit) }}"
+    routing_config: "{{ network.routing_config | default(omit) }}"
+    state: "{{ address.state | default(gcp_state) | default('present') }}"
+  loop: "{{ gcp_networks }}"
+  loop_control:
+    loop_var: network
+    label: "{{ network.name }}"
+...

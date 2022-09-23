@@ -2,7 +2,7 @@
 galaxy_info:
   author: Christoffer Reijer
   namespace: gcp
-  description: Create, manage and delete addresses in Google Compute Platform.
+  description: Create, manage and delete networks in Google Compute Platform.
   company: Jugas IT
   issue_tracker_url: https://gitlab.com/jugasit/ansible/gcp/-/issues
   license: GPL-3.0-only
@@ -11,7 +11,6 @@ galaxy_info:
     - google
     - cloud
     - network
-    - address
   platforms:
     - name: Fedora
       versions:

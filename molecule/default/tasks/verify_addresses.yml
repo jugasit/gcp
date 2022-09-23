@@ -1,0 +1,40 @@
+---
+- name: Get address info
+  google.cloud.gcp_compute_address_info:
+    region: "{{ gcp_region }}"
+    project: "{{ gcp_project }}"
+    auth_kind: "{{ gcp_auth_kind }}"
+    service_account_file: "{{ gcp_service_account_file }}"
+    filters:
+      - "name:mlcl-{{ mlcl_prefix }}-*"
+  register: found_addresses
+
+- name: Verify number of addresses
+  vars:
+    expected: "{{ gcp_addresses | length }}"
+    actual: "{{ found_addresses | community.general.json_query('resources[*].name') | length }}"
+  ansible.builtin.assert:
+    quiet: true
+    that: actual == expected
+    fail_msg: >-
+      The wrong number of addresses were detected,
+      expected {{ expected }} but found {{ actual }}
+
+- name: Verify each address
+  ansible.builtin.assert:
+    quiet: true
+    that:
+      - actual.name == expected.name
+      - actual.description == expected.description
+      - actual.networkTier == expected.network_tier | default('PREMIUM')
+      - actual.address | ansible.utils.ipv4
+      - actual.addressType == 'EXTERNAL'
+      - actual.status == 'RESERVED'
+  loop: "{{ gcp_addresses }}"
+  loop_control:
+    loop_var: expected
+    label: "{{ expected.name }}"
+  vars:
+    json_query: resources[?name=='{{ expected.name }}']
+    actual: "{{ found_addresses | community.general.json_query(json_query) | first }}"
+...

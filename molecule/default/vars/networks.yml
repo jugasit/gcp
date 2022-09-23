@@ -1,0 +1,12 @@
+---
+gcp_networks:
+  - name: mlcl-{{ mlcl_prefix }}-network1
+    description: First network in GCP created by Ansible Molecule.
+    mtu: 1460
+
+  - name: mlcl-{{ mlcl_prefix }}-network2
+    description: Second network in GCP created by Ansible Molecule.
+    mtu: 1500
+    routing_config:
+      routing_mode: GLOBAL
+...

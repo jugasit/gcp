@@ -1,49 +1,15 @@
 ---
-- name: Verify
+- name: Verify resources in GCP
   hosts: localhost
   connection: local
   gather_facts: false
 
   vars_files:
-    - vars.yml
+    - vars/common.yml
+    - vars/addresses.yml
+    - vars/networks.yml
 
   tasks:
-    - name: Get address info
-      google.cloud.gcp_compute_address_info:
-        region: "{{ gcp_region }}"
-        project: "{{ gcp_project }}"
-        auth_kind: "{{ gcp_auth_kind }}"
-        service_account_file: "{{ gcp_service_account_file }}"
-      register: found_addresses
-
-    - name: Save list of address names
-      set_fact:
-        gcp_address_names: "{{ found_addresses | community.general.json_query('resources[*].name') }}"
-
-    - name: Verify number of addresses
-      ansible.builtin.assert:
-        quiet: true
-        that: gcp_address_names | length >= gcp_addresses | length
-        fail_msg: >-
-          The wrong number of addresses were detected,
-          expected at least {{ molecule_yml.platforms | length }}
-          but found only {{ gcp_address_names | length }}
-
-    - name: Verify each address
-      ansible.builtin.assert:
-        quiet: true
-        that:
-          - actual.name == expected.name
-          - actual.description == expected.description
-          - actual.networkTier == expected.network_tier | default('PREMIUM')
-          - actual.address | ansible.utils.ipv4
-          - actual.addressType == 'EXTERNAL'
-          - actual.status == 'RESERVED'
-      loop: "{{ gcp_addresses }}"
-      loop_control:
-        loop_var: expected
-        label: "{{ expected.name }}"
-      vars:
-        json_query: resources[?name=='{{ expected.name }}']
-        actual: "{{ found_addresses | community.general.json_query(json_query) | first }}"
+    - include_tasks: tasks/verify_addresses.yml
+    - include_tasks: tasks/verify_networks.yml
 ...

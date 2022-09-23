@@ -1,13 +1,16 @@
 ---
-- name: Create
+- name: Create resources in GCP
   hosts: localhost
   connection: local
   gather_facts: false
   no_log: "{{ molecule_no_log }}"
 
   vars_files:
-    - vars.yml
+    - vars/common.yml
+    - vars/addresses.yml
+    - vars/networks.yml
 
   roles:
     - addresses
+    - networks
 ...

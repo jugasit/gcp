@@ -1,0 +1,9 @@
+---
+gcp_addresses:
+  - name: mlcl-{{ mlcl_prefix }}-address1
+    description: First address in GCP created by Ansible Molecule.
+
+  - name: mlcl-{{ mlcl_prefix }}-address2
+    description: Second address in GCP created by Ansible Molecule.
+    network_tier: STANDARD
+...

@@ -30,8 +30,8 @@ In addition the following optional fields are available:
 
     Choices:
 
-      - `INGRESS`
-      - `EGRESS`
+    - `INGRESS`
+    - `EGRESS`
 
 - `disabled`: Denotes whether the firewall rule is disabled, i.e not applied to the network it is associated with.
     When set to `true`, the firewall rule is not enforced and the network behaves as if it did not exist.
@@ -39,8 +39,8 @@ In addition the following optional fields are available:
 
     Choices:
 
-      - `no`
-      - `yes`
+    - `no`
+    - `yes`
 
 - `log_config`: This field denotes the logging options for a particular firewall rule.
     If logging is enabled, logs will be exported to Cloud Logging.
@@ -106,7 +106,7 @@ In addition the following optional fields are available:
 Example Playbook
 ----------------
 
-Create a firewall allowing HTTP and HTTPS from 192.168.0.0/24:
+Create a firewall allowing HTTP and HTTPS from `192.168.0.0/24`:
 
 ```yaml
 - name: Create GCP firewalls

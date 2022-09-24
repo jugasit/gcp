@@ -2,10 +2,6 @@
 
 Ansible roles for interacting with the GCP API.
 
-## Documentation
-
-A list of all roles and their documentation can be found in the directory of each role.
-
 ## Installation
 
 You can install the collection from [Ansible Galaxy](https://galaxy.ansible.com/jugasit/gcp) by running `ansible-galaxy collection install jugasit.gcp`.

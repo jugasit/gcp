@@ -38,6 +38,8 @@ pages:
   artifacts:
     paths:
       - public
+  only:
+    - tags
 
 publish:
   stage: release

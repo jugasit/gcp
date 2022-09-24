@@ -40,7 +40,7 @@ the project to use.
 To run the full chain of tests:
 
 ```shell
-ansible-molecule test
+make test
 ```
 
 This will:

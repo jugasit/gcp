@@ -49,10 +49,10 @@ dependencies:
 repository: http://gitlab.com/jugasit/ansible/gcp
 
 # The URL to any online docs
-documentation: http://docs.example.com
+documentation: https://jugasit.gitlab.io/ansible/gcp/
 
 # The URL to the homepage of the collection/project
-homepage: http://example.com
+homepage: https://jugasit.gitlab.io/ansible/gcp/
 
 # The URL to the collection issue tracker
 issues: https://gitlab.com/jugasit/ansible/gcp/-/issues

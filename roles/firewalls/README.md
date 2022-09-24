@@ -50,9 +50,9 @@ In addition the following optional fields are available:
     If you choose to specify this property, you can specify the network as a full or partial URL.
     For example, the following are all valid URLs:
 
-      - `https://www.googleapis.com/compute/v1/projects/myproject/global/`
-      - `networks/my-network`
-      - `projects/myproject/global/networks/my-network global/networks/default`
+    - `https://www.googleapis.com/compute/v1/projects/myproject/global/`
+    - `networks/my-network`
+    - `projects/myproject/global/networks/my-network global/networks/default`
 
     This field represents a link to a Network resource in GCP. It can be specified in two ways.
     First, you can place a dictionary with key `selfLink` and value of your resource’s `selfLink`.

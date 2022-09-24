@@ -1,0 +1,29 @@
+---
+- name: Configure GCP firewalls
+  google.cloud.gcp_compute_firewall:
+    auth_kind: "{{ gcp_auth_kind | default(omit) }}"
+    service_account_email: "{{ gcp_service_account_email | default(omit) }}"
+    service_account_file: "{{ gcp_service_account_file | default(omit) }}"
+    scopes: "{{ gcp_scopes | default(omit) }}"
+    project: "{{ gcp_project | default(omit) }}"
+    name: "{{ firewall.name }}"
+    allowed: "{{ firewall.allowed | default(omit) }}"
+    denied: "{{ firewall.denied | default(omit) }}"
+    description: "{{ firewall.description | default(omit) }}"
+    destination_ranges: "{{ firewall.destination_ranges | default(omit) }}"
+    direction: "{{ firewall.direction | default(omit) }}"
+    disabled: "{{ firewall.disabled | default(omit) }}"
+    log_config: "{{ firewall.log_config | default(omit) }}"
+    firewall: "{{ firewall.firewall | default(omit) }}"
+    priority: "{{ firewall.priority | default(omit) }}"
+    source_ranges: "{{ firewall.source_ranges | default(omit) }}"
+    source_service_accounts: "{{ firewall.source_service_accounts | default(omit) }}"
+    source_tags: "{{ firewall.source_tags | default(omit) }}"
+    target_service_accounts: "{{ firewall.target_service_accounts | default(omit) }}"
+    target_tags: "{{ firewall.target_tags | default(omit) }}"
+    state: "{{ address.state | default(gcp_state) | default('present') }}"
+  loop: "{{ gcp_firewalls }}"
+  loop_control:
+    loop_var: firewall
+    label: "{{ firewall.name }}"
+...

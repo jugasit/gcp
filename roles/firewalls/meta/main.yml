@@ -1,0 +1,21 @@
+---
+galaxy_info:
+  author: Christoffer Reijer
+  namespace: gcp
+  description: Create, manage and delete firewalls and rules in Google Compute Platform.
+  company: Jugas IT
+  issue_tracker_url: https://gitlab.com/jugasit/ansible/gcp/-/issues
+  license: GPL-3.0-only
+  min_ansible_version: '2.9'
+  galaxy_tags:
+    - google
+    - cloud
+    - network
+    - firewall
+  platforms:
+    - name: Fedora
+      versions:
+        - all
+
+dependencies: []
+...

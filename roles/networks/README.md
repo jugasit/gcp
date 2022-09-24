@@ -19,20 +19,24 @@ The main data structure for this role is the list of `gcp_networks`. Each `netwo
 
 In addition the following optional fields are available:
 
-- `auto_create_subnetworks`: When set to `true`, the network is created in “auto subnet mode” and it will create a subnet for each region automatically across the `10.128.0.0/9` address range.
+- `auto_create_subnetworks`: When set to `true`, the network is created in “auto subnet mode” and it will create a
+    subnet for each region automatically across the `10.128.0.0/9` address range.
 
-    When set to `false`, the network is created in “custom subnet mode” so the user can explicitly connect subnetwork resources.
+    When set to `false`, the network is created in *custom subnet mode* so the user can explicitly connect
+    subnetwork resources.
 
     Choices:
 
-      - no
-      - yes
+    - `no`
+    - `yes`
 
-    Default: `yes`
+    Default: `yes`.
 
 - `description`: An optional description of this resource. The resource must be recreated to modify this field.
-- `mtu`: Maximum Transmission Unit in bytes. The minimum value for this field is 1460 and the maximum value is 1500 bytes.
-- `routing_config`: The network-level routing configuration for this network. Used by Cloud Router to determine what type of network-wide routing behavior to enforce.
+- `mtu`: Maximum Transmission Unit in bytes.
+    The minimum value for this field is `1460` and the maximum value is `1500` bytes.
+- `routing_config`: The network-level routing configuration for this network.
+    Used by Cloud Router to determine what type of network-wide routing behavior to enforce.
 
 Example Playbook
 ----------------

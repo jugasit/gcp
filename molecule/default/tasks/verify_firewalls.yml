@@ -1,0 +1,56 @@
+---
+- name: Get firewall info
+  google.cloud.gcp_compute_firewall_info:
+    project: "{{ gcp_project }}"
+    auth_kind: "{{ gcp_auth_kind }}"
+    service_account_file: "{{ gcp_service_account_file }}"
+    filters:
+      - "name:mlcl-{{ mlcl_prefix }}-*"
+  register: found_firewalls
+
+- name: Verify number of firewalls
+  vars:
+    expected: "{{ gcp_firewalls | length }}"
+    actual: "{{ found_firewalls | community.general.json_query('resources[*].name') | length }}"
+  ansible.builtin.assert:
+    quiet: true
+    that: actual == expected
+    fail_msg: >-
+      The wrong number of firewalls were detected,
+      expected {{ expected }} but found {{ actual }}
+
+- name: Verify firewall 0
+  vars:
+    expected: "{{ gcp_firewalls[0] }}"
+    json_query: resources[?name=='{{ expected.name }}']
+    actual: "{{ found_firewalls | community.general.json_query(json_query) | first }}"
+  ansible.builtin.assert:
+    quiet: true
+    that:
+      - actual.name == expected.name
+      - actual.description == expected.description
+      - actual.allowed | length == 3
+      - actual.allowed[0].IPProtocol == 'icmp'
+      - actual.allowed[1].IPProtocol == 'tcp'
+      - actual.allowed[1].ports == ["1-65535"]
+      - actual.allowed[2].IPProtocol == 'udp'
+      - actual.allowed[2].ports == ["1-65535"]
+      - actual.sourceRanges == ["10.128.0.0/9"]
+
+- name: Verify firewall 1
+  vars:
+    expected: "{{ gcp_firewalls[1] }}"
+    json_query: resources[?name=='{{ expected.name }}']
+    actual: "{{ found_firewalls | community.general.json_query(json_query) | first }}"
+  ansible.builtin.assert:
+    quiet: true
+    that:
+      - actual.name == expected.name
+      - actual.description == expected.description
+      - actual.allowed | length == 2
+      - actual.allowed[0].IPProtocol == 'icmp'
+      - actual.allowed[1].IPProtocol == 'tcp'
+      - actual.allowed[1].ports == ["22", "80", "443"]
+      - actual.sourceRanges == ["0.0.0.0/0"]
+      - actual.direction == "INGRESS"
+...

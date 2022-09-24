@@ -8,8 +8,10 @@
     - vars/common.yml
     - vars/addresses.yml
     - vars/networks.yml
+    - vars/firewalls.yml
 
   tasks:
     - include_tasks: tasks/verify_addresses.yml
     - include_tasks: tasks/verify_networks.yml
+    - include_tasks: tasks/verify_firewalls.yml
 ...

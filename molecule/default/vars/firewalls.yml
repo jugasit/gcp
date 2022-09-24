@@ -1,0 +1,23 @@
+---
+gcp_firewalls:
+  - name: mlcl-{{ mlcl_prefix }}-firewall1
+    description: First firewall in GCP created by Ansible Molecule.
+    network:
+      selfLink: global/networks/mlcl-{{ mlcl_prefix }}-network1
+    source_ranges: ["10.128.0.0/9"]
+    allowed:
+      - ip_protocol: icmp
+      - ip_protocol: tcp
+        ports: [1-65535]
+      - ip_protocol: udp
+        ports: [1-65535]
+
+  - name: mlcl-{{ mlcl_prefix }}-firewall2
+    description: Second firewall in GCP created by Ansible Molecule.
+    network:
+      selfLink: global/networks/mlcl-{{ mlcl_prefix }}-network1
+    allowed:
+      - ip_protocol: icmp
+      - ip_protocol: tcp
+        ports: [22, 80, 443]
+...

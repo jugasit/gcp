@@ -9,8 +9,10 @@
     - vars/common.yml
     - vars/addresses.yml
     - vars/networks.yml
+    - vars/firewalls.yml
 
   roles:
     - addresses
     - networks
+    - firewalls
 ...

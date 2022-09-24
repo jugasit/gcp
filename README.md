@@ -10,7 +10,7 @@ A list of all roles and their documentation can be found in the directory of eac
 
 You can install the collection from [Ansible Galaxy](https://galaxy.ansible.com/jugasit/gcp) by running `ansible-galaxy collection install jugasit.gcp`.
 
-After the installation, the roles are available as `jugasit.gcp.<module_name>`. Please see the [Using Ansible collections documentation](https://docs.ansible.com/ansible/devel/user_guide/collections_using.html) for further details.
+After the installation, the roles are available as `jugasit.gcp.<role_name>`. Please see the [Using Ansible collections documentation](https://docs.ansible.com/ansible/devel/user_guide/collections_using.html) for further details.
 
 ### Common Role Requirements
 

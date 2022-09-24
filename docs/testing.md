@@ -1,4 +1,4 @@
-# Testing
+# Testing the collection
 
 All changes to this repository are tested using a GitLab CI pipeline.
 It is important to add tests when writing new code, to ensure that future changes will not break the code.

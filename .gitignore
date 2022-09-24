@@ -24,3 +24,6 @@
 *.tar.gz
 venv/
 tmp/
+docs/README.md
+docs/_build
+docs/roles/

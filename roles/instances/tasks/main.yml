@@ -1,0 +1,31 @@
+---
+- name: Configure GCP instances
+  google.cloud.gcp_compute_instance:
+    auth_kind: "{{ gcp_auth_kind | default(omit) }}"
+    service_account_email: "{{ gcp_service_account_email | default(omit) }}"
+    service_account_file: "{{ gcp_service_account_file | default(omit) }}"
+    scopes: "{{ gcp_scopes | default(omit) }}"
+    project: "{{ gcp_project | default(omit) }}"
+    zone: "{{ instance.zone | default(gcp_zone) }}"
+    name: "{{ instance.name }}"
+    can_ip_forward: "{{ instance.can_ip_forward | default(omit) }}"
+    deletion_protection: "{{ instance.deletion_protection | default(omit) }}"
+    disks: "{{ instance.disks | default(omit) }}"
+    guest_accelerators: "{{ instance.guest_accelerators | default(omit) }}"
+    hostname: "{{ instance.hostname | default(omit) }}"
+    labels: "{{ instance.labels | default(omit) }}"
+    machine_type: "{{ instance.machine_type | default(omit) }}"
+    metadata: "{{ instance.metadata | default(omit) }}"
+    min_cpu_platform: "{{ instance.min_cpu_platform | default(omit) }}"
+    network_interfaces: "{{ instance.network_interfaces | default(omit) }}"
+    scheduling: "{{ instance.scheduling | default(omit) }}"
+    service_accounts: "{{ instance.service_accounts | default(omit) }}"
+    shielded_instance_config: "{{ instance.shielded_instance_config | default(omit) }}"
+    status: "{{ instance.status | default(omit) }}"
+    tags: "{{ instance.tags | default(omit) }}"
+    state: "{{ instance.state | default(gcp_state) | default('present') }}"
+  loop: "{{ gcp_instances }}"
+  loop_control:
+    loop_var: instance
+    label: "{{ instance.name }}"
+...

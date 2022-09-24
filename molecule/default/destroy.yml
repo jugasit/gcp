@@ -10,11 +10,13 @@
     - vars/addresses.yml
     - vars/networks.yml
     - vars/firewalls.yml
+    - vars/instances.yml
 
   vars:
     gcp_state: absent
 
   roles:
+    - instances
     - addresses
     - firewalls
     - networks

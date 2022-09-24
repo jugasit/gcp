@@ -9,9 +9,11 @@
     - vars/addresses.yml
     - vars/networks.yml
     - vars/firewalls.yml
+    - vars/instances.yml
 
   tasks:
     - include_tasks: tasks/verify_addresses.yml
     - include_tasks: tasks/verify_networks.yml
     - include_tasks: tasks/verify_firewalls.yml
+    - include_tasks: tasks/verify_instances.yml
 ...

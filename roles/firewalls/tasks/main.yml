@@ -21,7 +21,7 @@
     source_tags: "{{ firewall.source_tags | default(omit) }}"
     target_service_accounts: "{{ firewall.target_service_accounts | default(omit) }}"
     target_tags: "{{ firewall.target_tags | default(omit) }}"
-    state: "{{ address.state | default(gcp_state) | default('present') }}"
+    state: "{{ firewall.state | default(gcp_state) | default('present') }}"
   loop: "{{ gcp_firewalls }}"
   loop_control:
     loop_var: firewall

@@ -1,0 +1,24 @@
+---
+gcp_instances:
+  - name: mlcl-{{ mlcl_prefix }}-instance1
+    machine_type: n2-standard-2
+    labels:
+      my_label: something
+    disks:
+      - auto_delete: true
+        boot: true
+        type: PERSISTENT
+        initialize_params:
+          source_image: projects/rhel-cloud/global/images/rhel-9-v20220822
+          disk_size_gb: 50
+    network_interfaces:
+      - network:
+          selfLink: global/networks/mlcl-{{ mlcl_prefix }}-network1
+        access_configs:
+          - name: External NAT
+            nat_ip:
+              selfLink: global/addresses/mlcl-{{ mlcl_prefix }}-address1
+            type: ONE_TO_ONE_NAT
+    metadata:
+      ssh-keys: "{{ lookup('env', 'USER') }}:{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+...

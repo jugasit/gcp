@@ -10,9 +10,11 @@
     - vars/addresses.yml
     - vars/networks.yml
     - vars/firewalls.yml
+    - vars/instances.yml
 
   roles:
     - addresses
     - networks
     - firewalls
+    - instances
 ...

@@ -1,0 +1,46 @@
+---
+- name: Get instance info
+  google.cloud.gcp_compute_instance_info:
+    project: "{{ gcp_project }}"
+    zone: "{{ gcp_zone }}"
+    auth_kind: "{{ gcp_auth_kind }}"
+    service_account_file: "{{ gcp_service_account_file }}"
+    filters:
+      - "name:mlcl-{{ mlcl_prefix }}-*"
+  register: found_instances
+
+- name: Verify number of instances
+  vars:
+    expected: "{{ gcp_instances | length }}"
+    actual: "{{ found_instances | community.general.json_query('resources[*].name') | length }}"
+  ansible.builtin.assert:
+    quiet: true
+    that: actual == expected
+    fail_msg: >-
+      The wrong number of instances were detected,
+      expected {{ expected }} but found {{ actual }}
+
+- name: Verify instance
+  vars:
+    expected: "{{ gcp_instances[0] }}"
+    json_query: resources[?name=='{{ expected.name }}']
+    actual: "{{ found_instances | community.general.json_query(json_query) | first }}"
+  ansible.builtin.assert:
+    quiet: true
+    that:
+      - actual.name == expected.name
+      - actual.disks | length == 1
+      - actual.disks[0].autoDelete == true
+      - actual.disks[0].boot == true
+      - actual.disks[0].diskSizeGb == "50"
+      - actual.disks[0].type == "PERSISTENT"
+      - actual.labels.my_label == "something"
+      - '"n2-standard-2" in actual.machineType'
+      - actual.metadata["items"] | length == 1
+      - actual.metadata["items"][0].key == "ssh-keys"
+      - '"ssh-rsa" in actual.metadata["items"][0].value'
+      - actual.networkInterfaces | length == 1
+      - actual.networkInterfaces[0].accessConfigs[0].name == "External NAT"
+      - actual.networkInterfaces[0].accessConfigs[0].type == "ONE_TO_ONE_NAT"
+      - actual.status == "RUNNING"
+...

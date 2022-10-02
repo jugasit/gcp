@@ -15,6 +15,7 @@ molecule roles:
     - pip3 install -r requirements.txt
     - ansible-galaxy collection install -r collections/requirements.yml
     - ssh-keygen -f ~/.ssh/id_rsa -N ""
+    - chmod 0600 ~/.ssh/id_rsa*
     - molecule test -s default
   except:
     - tags
@@ -26,6 +27,7 @@ molecule playbook:
     - pip3 install -r requirements.txt
     - ansible-galaxy collection install -r collections/requirements.yml
     - ssh-keygen -f ~/.ssh/id_rsa -N ""
+    - chmod 0600 ~/.ssh/id_rsa*
     - molecule test -s playbook
   except:
     - tags

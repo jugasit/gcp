@@ -7,7 +7,7 @@ dependency:
 driver:
   name: delegated
   gcp_project: ${GCP_PROJECT}
-  gcp_service_account_file: ${GCP_SERVICE_ACCOUNT_FILE}
+  gcp_service_account_file: ${GCP_CREDENTIALS}
   gcp_region: europe-north1
   gcp_zone: europe-north1-a
 

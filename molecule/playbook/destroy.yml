@@ -1,0 +1,8 @@
+---
+- import_playbook: ../../playbooks/remove_instances.yml
+  vars:
+    gcp_project: "{{ molecule_yml.driver.gcp_project }}"
+    gco_zone: "{{ molecule_yml.driver.gco_zone }}"
+    gcp_service_account_file: "{{ molecule_yml.driver.gcp_service_account_file }}"
+    gcp_instances_simplified: "{{ molecule_yml.platforms }}"
+...

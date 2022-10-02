@@ -1,0 +1,16 @@
+---
+- name: Create GCP instances
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  pre_tasks:
+    - include_tasks: tasks/verify_vars.yml
+
+  roles:
+
+    - role: addresses
+      tags: [ gcp, addresses ]
+
+    - role: instances
+      tags: [ gcp, instances ]
+...

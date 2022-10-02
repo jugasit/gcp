@@ -1,0 +1,63 @@
+---
+- import_playbook: ../../playbooks/create_instances.yml
+  vars:
+    gcp_project: "{{ molecule_yml.driver.gcp_project }}"
+    gco_region: "{{ molecule_yml.driver.gco_region }}"
+    gcp_zone: "{{ molecule_yml.driver.gcp_zone }}"
+    gcp_service_account_file: "{{ molecule_yml.driver.gcp_service_account_file }}"
+    gcp_instances_simplified: "{{ molecule_yml.platforms }}"
+
+- name: Generate instance config
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  vars:
+    gcp_project: "{{ molecule_yml.driver.gcp_project }}"
+    gco_region: "{{ molecule_yml.driver.gco_region }}"
+    gcp_zone: "{{ molecule_yml.driver.gcp_zone }}"
+    gcp_service_account_file: "{{ molecule_yml.driver.gcp_service_account_file }}"
+    gcp_instances_simplified: "{{ molecule_yml.platforms }}"
+
+  tasks:
+    - name: Get GCP instances
+      google.cloud.gcp_compute_instance_info:
+        project: "{{ gcp_project }}"
+        zone: "{{ gcp_zone }}"
+        auth_kind: serviceaccount
+        service_account_file: "{{ gcp_service_account_file }}"
+        filters:
+          - "name:{{ item.name }}"
+      loop: "{{ gcp_instances_simplified }}"
+      loop_control:
+        label: "{{ item.name }}"
+      register: found_instances
+
+    - name: Populate instance config dict
+      loop: "{{ found_instances.results }}"
+      vars:
+        instance: "{{ item.resources[0] }}"
+      loop_control:
+        label: "{{ instance.name }}"
+      ansible.builtin.set_fact:
+        instance_conf_dict:
+          instance: "{{ instance.name }}"
+          address: "{{ instance.networkInterfaces[0].accessConfigs[0].natIP }}"
+          user: "{{ lookup('env', 'USER') }}"
+          port: 22
+          identity_file: "~/.ssh/id_rsa.pub"
+      register: instance_config_dict
+
+    - name: Convert instance config dict to a list
+      ansible.builtin.set_fact:
+        instance_conf: "{{ instance_config_dict.results | map(attribute='ansible_facts.instance_conf_dict') | list }}"
+
+    - name: Dump instance config
+      ansible.builtin.copy:
+        content: |
+          # Molecule managed
+
+          {{ instance_conf | to_json | from_json | to_yaml }}
+        dest: "{{ molecule_instance_config }}"
+        mode: 0600
+...

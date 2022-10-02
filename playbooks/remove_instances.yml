@@ -1,0 +1,19 @@
+---
+- name: Remove GCP instances
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  vars:
+    gcp_state: absent
+
+  pre_tasks:
+    - include_tasks: tasks/verify_vars.yml
+
+  roles:
+
+    - role: instances
+      tags: [ gcp, instances ]
+
+    - role: addresses
+      tags: [ gcp, addresses ]
+...

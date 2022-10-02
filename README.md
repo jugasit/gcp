@@ -6,7 +6,38 @@ Ansible roles for interacting with the GCP API.
 
 You can install the collection from [Ansible Galaxy](https://galaxy.ansible.com/jugasit/gcp) by running `ansible-galaxy collection install jugasit.gcp`.
 
-After the installation, the roles are available as `jugasit.gcp.<role_name>`. Please see the [Using Ansible collections documentation](https://docs.ansible.com/ansible/devel/user_guide/collections_using.html) for further details.
+## Usage
+
+### Roles
+
+After the installation, the roles are available as `jugasit.gcp.<role_name>`.
+
+For example:
+
+```yaml
+- name: Create resources in GCP
+  hosts: localhost
+  connection: local
+  roles:
+    - jugasit.gcp.addresses
+    - jugasit.gcp.networks
+    - jugasit.gcp.firewalls
+    - jugasit.gcp.instances
+```
+
+Please see the [Using Ansible collections documentation](https://docs.ansible.com/ansible/devel/collections_guide/index.html#collections-index) for further details.
+
+### Playbooks
+
+To use the playbooks:
+
+```yaml
+- import_playbook: jugasit.gcp.create_instances
+```
+
+### Reference
+
+For the full reference of all roles and playbooks available see [our documentation]().
 
 ### Common Role Requirements
 

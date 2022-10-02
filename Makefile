@@ -6,7 +6,7 @@ help:
 	@echo "  docs             to build the collection documentation"
 
 test:
-	molecule test
+	molecule test -s all
 
 docs:
 	mkdir -p docs/roles
@@ -18,7 +18,8 @@ docs:
 		echo " * :doc:\`$$(basename $$(dirname $$role_readme))\`" >> ./docs/roles/index.rst; \
 	done
 	make -C docs html
-#	antsibull-docs sphinx-init --use-current --squash-hierarchy --dest-dir tmp/docs jugasit.gcp
-#	tmp/docs/build.sh
+
+clean:
+	rm -rf docs/_build docs/roles docs/README.md *.tar.gz
 
 .PHONY: help test docs

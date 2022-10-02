@@ -59,16 +59,18 @@ ansible-molecule verify
 ansible-molecule destroy
 ```
 
+You may specify the scenario to use with `-s SCENARIO|all`.
+
 ## Writing tests
 
 During each of the above steps, except for linting, an Ansible playbook is executed.
 These playbooks are:
 
-- `molecule/default/create.yml`
-- `molecule/default/verify.yml`
-- `molecule/default/destroy.yml`
+- `molecule/[SCENARIO]/create.yml`
+- `molecule/[SCENARIO]/verify.yml`
+- `molecule/[SCENARIO]/destroy.yml`
 
-Variables are kept in a separate file:
+Variables in the default scenario are kept in a separate file:
 
 - `molecule/default/vars.yml`
 

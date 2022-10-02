@@ -1,0 +1,31 @@
+---
+prerun: false
+
+dependency:
+  name: galaxy
+
+driver:
+  name: delegated
+  gcp_project: ${GCP_PROJECT}
+  gcp_service_account_file: ${GCP_SERVICE_ACCOUNT_FILE}
+  gcp_region: europe-north1
+  gcp_zone: europe-north1-a
+
+platforms:
+  - name: instance1
+    machine_type: n2-standard-2
+    disk: 50
+
+provisioner:
+  name: ansible
+  env:
+    ANSIBLE_ROLES_PATH: ../../roles/
+
+verifier:
+  name: ansible
+
+lint: |
+  set -e
+  yamllint .
+  ansible-lint
+...

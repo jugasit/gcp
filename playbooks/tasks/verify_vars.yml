@@ -1,0 +1,13 @@
+---
+- name: Verify credential file
+  ansible.builtin.assert:
+    that: gcp_service_account_file is defined
+    quiet: true
+    fail_msg: "You must set 'gcp_service_account_file' to the path of your Service Account JSON file."
+
+- name: Verify project
+  ansible.builtin.assert:
+    that: gcp_project is defined
+    quiet: true
+    fail_msg: "You must set 'gcp_project' to the ID of your GCP project."
+...

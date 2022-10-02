@@ -24,8 +24,19 @@
     status: "{{ instance.status | default(omit) }}"
     tags: "{{ instance.tags | default(omit) }}"
     state: "{{ instance.state | default(gcp_state) | default('present') }}"
+  register: instances
   loop: "{{ gcp_instances }}"
   loop_control:
     loop_var: instance
     label: "{{ instance.name }}"
+
+- name: Wait for GCP instance
+  ansible.builtin.wait_for:
+    host: "{{ result.networkInterfaces[0].accessConfigs[0].natIP }}"
+    port: 22
+  when: result.invocation.module_args.state != "absent"
+  loop: "{{ instances.results }}"
+  loop_control:
+    loop_var: result
+    label: "{{ result.instance.name }}"
 ...

@@ -1,0 +1,57 @@
+---
+gcp_instances_simplified: []
+gcp_region: europe-north1
+gcp_zone: "{{ gcp_region }}-a"
+gcp_auth_kind: serviceaccount
+
+gcp_addresses: |
+  [
+    {% for instance in gcp_instances_simplified %}
+    { "name": "{{ instance.name }}-address" },
+    {% endfor %}
+  ]
+
+gcp_instances: |
+  [
+    {% for instance in gcp_instances_simplified %}
+    {
+      "name": "{{ instance.name }}",
+      "machine_type": "{{ instance.machine_type }}",
+      "zone": "{{ gcp_zone }}",
+      {% if instance.labels | default(false) %}
+      "labels": {{ instance.labels | default({}) | to_json }},
+      {% endif %}
+      "disks": [
+        {
+          "auto_delete": "true",
+          "boot": "true",
+          "type": "PERSISTENT",
+          "initialize_params": {
+            "source_image": "projects/rhel-cloud/global/images/rhel-9-v20220822",
+            "disk_size_gb": "{{ instance.disk }}"
+          }
+        }
+      ],
+      "network_interfaces": [
+        {
+          "network": {
+            "selfLink": "global/networks/default"
+          },
+          "access_configs": [
+            {
+              "name": "External NAT",
+              "nat_ip": {
+                "selfLink": "global/addresses/{{ instance.name }}-address"
+              },
+              "type": "ONE_TO_ONE_NAT"
+            }
+          ]
+        }
+      ],
+      "metadata": {
+        "ssh-keys": "{{ lookup('env', 'USER') }}:{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+      }
+    },
+    {% endfor %}
+  ]
+...

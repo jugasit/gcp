@@ -1,0 +1,27 @@
+---
+- name: Converge
+  hosts: all
+  gather_facts: false
+  become: true
+  tasks:
+    - name: Install Apache
+      package:
+        name: httpd
+        state: present
+
+    - name: Create index.html
+      copy:
+        dest: /var/www/html/index.html
+        content: Server provisioned by Ansible Molecule.
+
+    - name: Start Apache
+      service:
+        name: httpd
+        state: started
+
+    - name: Open HTTP port
+      ansible.posix.firewalld:
+        service: http
+        permanent: yes
+        state: enabled
+...

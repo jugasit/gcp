@@ -1,0 +1,19 @@
+---
+- name: Verify
+  hosts: all
+  gather_facts: false
+  become: true
+  tasks:
+    - name: Get HTTP page
+      uri:
+        url: http://localhost
+        return_content: true
+      register: result
+
+    - name: Assert result
+      ansible.builtin.assert:
+        quiet: true
+        that:
+          - result.status == 200
+          - result.content == 'Server provisioned by Ansible Molecule.'
+...

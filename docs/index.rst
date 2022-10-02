@@ -6,6 +6,7 @@ Welcome to Jugas IT's GCP documentation!
    :caption: User documentation
 
    README
+   playbooks/index
    roles/index
 
 .. toctree::

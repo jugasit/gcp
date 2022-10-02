@@ -8,14 +8,25 @@ stages:
   - docs
   - release
 
-molecule:
+molecule roles:
   stage: test
   needs: []
   script:
     - pip3 install -r requirements.txt
     - ansible-galaxy collection install -r collections/requirements.yml
     - ssh-keygen -f ~/.ssh/id_rsa -N ""
-    - molecule test
+    - molecule test -s default
+  except:
+    - tags
+
+molecule playbook:
+  stage: test
+  needs: []
+  script:
+    - pip3 install -r requirements.txt
+    - ansible-galaxy collection install -r collections/requirements.yml
+    - ssh-keygen -f ~/.ssh/id_rsa -N ""
+    - molecule test -s playbooks
   except:
     - tags
 

@@ -8,4 +8,6 @@ gcp_region: europe-north1
 gcp_zone: "{{ gcp_region }}-a"
 gcp_auth_kind: serviceaccount
 gcp_service_account_file: "{{ lookup('env', 'GCP_CREDENTIALS') | default('../../tmp/gcp_credentials.json', true) }}"
+gcp_ssh_user: "{{ lookup('env', 'GCP_SSH_USER') | default(lookup('env', 'USER'), true) }}"
+gcp_ssh_key: "{{ lookup('env', 'GCP_SSH_KEY') | default(lookup('file', '~/.ssh/id_rsa.pub'), true) }}"
 ...

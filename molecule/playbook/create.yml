@@ -43,7 +43,7 @@
         instance_conf_dict:
           instance: "{{ instance.name }}"
           address: "{{ instance.networkInterfaces[0].accessConfigs[0].natIP }}"
-          user: "{{ lookup('env', 'USER') }}"
+          user: "{{ lookup('env', 'GCP_SSH_USER') | default(lookup('env', 'USER'), true) }}"
           port: 22
           identity_file: "~/.ssh/id_rsa.pub"
       register: instance_config_dict

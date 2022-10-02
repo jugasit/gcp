@@ -37,7 +37,7 @@ To use the playbooks:
 
 ### Reference
 
-For the full reference of all roles and playbooks available see [our documentation]().
+For the full reference of all roles and playbooks available see [our documentation](https://jugasit.gitlab.io/ansible/gcp).
 
 ### Common Role Requirements
 

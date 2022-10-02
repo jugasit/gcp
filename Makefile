@@ -4,9 +4,10 @@ help:
 	@echo "  help             to show this message"
 	@echo "  test             to run unit tests"
 	@echo "  docs             to build the collection documentation"
+	@echo "  clean            to remove temporary build files"
 
 test:
-	molecule test -s all
+	molecule test --all
 
 docs:
 	mkdir -p docs/roles
@@ -22,4 +23,4 @@ docs:
 clean:
 	rm -rf docs/_build docs/roles docs/README.md *.tar.gz
 
-.PHONY: help test docs
+.PHONY: help test docs clean

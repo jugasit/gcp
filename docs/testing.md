@@ -59,7 +59,7 @@ ansible-molecule verify
 ansible-molecule destroy
 ```
 
-You may specify the scenario to use with `-s SCENARIO|all`.
+You may specify the scenario to use with `-s SCENARIO`, or test all scenarios with `--all`.
 
 ## Writing tests
 

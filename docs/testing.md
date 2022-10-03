@@ -35,6 +35,13 @@ the project to use.
 2. Save the JSON keys under `tmp/gcp_credentials.json`
 3. Set your GCP project as an environment variable by running `export GCP_PROJECT=[project_name]`.
 
+Then set the necessary environment variables:
+
+```shell
+export GCP_CREDENTIALS=$PWD/tmp/gcp_credentials.json
+export GCP_PROJECT=my-project-123456
+```
+
 ### Run molecule
 
 To run the full chain of tests:

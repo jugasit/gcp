@@ -15,6 +15,12 @@ platforms:
   - name: instance1
     machine_type: n2-standard-2
     disk: 50
+    image: projects/ubuntu-os-cloud/global/images/family/ubuntu-1604-lts
+
+  - name: instance2
+    machine_type: n2-standard-2
+    disk: 50
+    image: projects/rhel-cloud/global/images/family/rhel-9
 
 provisioner:
   name: ansible

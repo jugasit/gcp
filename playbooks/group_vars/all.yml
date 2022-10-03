@@ -29,7 +29,7 @@ gcp_instances: |
           "boot": "true",
           "type": "PERSISTENT",
           "initialize_params": {
-            "source_image": "projects/rhel-cloud/global/images/rhel-9-v20220822",
+            "source_image": "{{ instance.image | default(gcp_default_image) }}",
             "disk_size_gb": "{{ instance.disk }}"
           }
         }
